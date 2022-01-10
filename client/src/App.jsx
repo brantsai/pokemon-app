@@ -7,11 +7,21 @@ import axios from 'axios';
 const App = () => {
   const [cardList, setCardList] = useState(dummyData.data);
   const [search, setSearch] = useState('');
-  const [currentPage, setCurrentPage] = useState('');
+  const [currentPage, setCurrentPage] = useState('cardView');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // route to server
+    axios.get('/api/cards', {
+      params: {
+        q: search
+      }
+    })
+      .then((response) => {
+        setCardList(response.data.data);
+      })
+      .catch((error) => {
+        console.log('client ERROR', error);
+      })
   }
 
   const handleSearch = (event) => {
