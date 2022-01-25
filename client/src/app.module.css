@@ -145,3 +145,28 @@ a {
   width: 30px;
   margin-left: 5px;
 }
+
+.cardDisplayContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.cardSearchDisplay {
+  margin: 3%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 180px;
+}
+
+.cardSearchImage {
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+.cardSearchText {
+  align-self: center;
+  overflow-wrap: break-word;
+}

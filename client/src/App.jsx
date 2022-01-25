@@ -3,11 +3,12 @@ import dummyData from './dummyData.js';
 import CardView from './CardView.jsx';
 import css from './app.module.css';
 import axios from 'axios';
+import SearchView from './SearchView.jsx';
 
 const App = () => {
   const [cardList, setCardList] = useState(dummyData.data);
   const [search, setSearch] = useState('');
-  const [currentPage, setCurrentPage] = useState('cardView');
+  const [currentPage, setCurrentPage] = useState('searchView');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,7 +21,7 @@ const App = () => {
         setCardList(response.data.data);
       })
       .catch((error) => {
-        console.log('client ERROR', error);
+        console.log('client-side ERROR', error);
       })
   }
 
@@ -28,11 +29,35 @@ const App = () => {
     setSearch(event.target.value);
   }
 
+  useEffect(() => {
+    axios.get('/api/cards/set', {
+      params: {
+        q: 'evolving'
+      }
+    })
+      .then((response) => {
+        setCardList(response.data.data);
+      })
+      .catch((error) => {
+        console.log('client-side ERROR', error);
+      })
+  }, []);
+
   const renderPage = () => {
     if (currentPage === 'cardView') {
       return (
         <div className={css.mainContainer}>
           <CardView
+            cardList={cardList}
+          />
+        </div>
+      )
+    }
+
+    if (currentPage === 'searchView') {
+      return (
+        <div className={css.mainContainer}>
+          <SearchView
             cardList={cardList}
           />
         </div>

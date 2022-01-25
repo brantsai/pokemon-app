@@ -7,5 +7,11 @@ module.exports = {
     {
       headers: { Authorization: config.API_KEY },
     },
+  ),
+  getSetCards: (req) => axios.get(
+    `https://api.pokemontcg.io/v2/cards?q=set.name:${req.query.q}`,
+    {
+      headers: { Authorization: config.API_KEY },
+    },
   )
 }

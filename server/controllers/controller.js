@@ -9,5 +9,14 @@ module.exports = {
       .catch((error) => {
         console.log('controller ERROR', error);
       });
+  },
+  getSetCards: (req, res) => {
+    model.getSetCards(req)
+      .then((response) => {
+        res.send(response.data);
+      })
+      .catch((error) => {
+        console.log('controller ERROR', error);
+      });
   }
 }

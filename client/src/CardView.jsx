@@ -83,12 +83,12 @@ const CardView = ({ cardList }) => {
             className={css.arrowCardImage}
             src={cardList[0].images.small}
           ></img>
-          {cardList[1].name}<br></br>
-          ({cardList[1].number}/{cardList[1].set.printedTotal})
+          {cardList[0].name}<br></br>
+          ({cardList[0].number}/{cardList[0].set.printedTotal})
         </div>
         <div className={css.rowContainer}>
-          {cardList[1].name}<br></br>
-          ({cardList[1].number}/{cardList[1].set.printedTotal})
+          {cardList[2].name}<br></br>
+          ({cardList[2].number}/{cardList[2].set.printedTotal})
           <img
             className={css.arrowCardImage}
             src={cardList[2].images.small}
