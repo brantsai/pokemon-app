@@ -43,6 +43,7 @@ a {
   flex-direction: column;
   height: 100%;
   margin-bottom: 2%;
+  align-content: center;
 }
 
 .cardInfo {
@@ -65,6 +66,7 @@ a {
 
 .cardImage {
   width: 40%;
+  max-width: 400px;
 }
 
 .rowContainer {
@@ -161,6 +163,10 @@ a {
   width: 180px;
 }
 
+.cardSearchDisplay:hover {
+  cursor: pointer;
+}
+
 .cardSearchImage {
   height: 250px;
   margin-bottom: 10px;
@@ -169,4 +175,43 @@ a {
 .cardSearchText {
   align-self: center;
   overflow-wrap: break-word;
+}
+
+.homeButton:hover {
+  cursor: pointer;
+}
+
+.modal_background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 77, 77, .7);
+}
+
+.model_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tradeModal {
+  height: 500px;
+  width: 800px;
+  background-color: #f0ece6;
+}
+
+.closeButton {
+  color: white;
+}
+
+.closeButton:hover {
+  cursor: pointer;
 }

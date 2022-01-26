@@ -1,42 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import css from './app.module.css';
 
-const CardView = ({ cardList }) => {
+const CardView = ({ card }) => {
+  const [tradeModalEnabled, setTradeModalEnabled] = useState(false);
+
+  const handleTrade = () => {
+    setTradeModalEnabled(!tradeModalEnabled);
+  }
+
+  const renderPrices = () => {
+    if (card.tcgplayer.prices.holofoil) {
+      return (
+        <div>
+          <p>
+            <b>Average Price: </b>${card.tcgplayer.prices.holofoil.market}
+          </p>
+          <p>
+            <b>High: </b> ${card.tcgplayer.prices.holofoil.high}
+          </p>
+          <p>
+            <b>Low: </b> ${card.tcgplayer.prices.holofoil.low}
+          </p>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <p>
+            <b>Average Price: </b>${card.tcgplayer.prices.normal.market}
+          </p>
+          <p>
+            <b>High: </b> ${card.tcgplayer.prices.normal.high}
+          </p>
+          <p>
+            <b>Low: </b> ${card.tcgplayer.prices.normal.low}
+          </p>
+        </div>
+      )
+    }
+  }
+
   return (
     <div className={css.centerColumn}>
       <div className={css.cardInfo}>
-        <h1>{cardList[1].name}</h1>
-        <p>Set name: {cardList[1].set.name}
+        <h1>{card.name}</h1>
+        <p>Set name: {card.set.name}
           <img
             className={css.symbol}
-            src={cardList[1].set.images.symbol}
+            src={card.set.images.symbol}
           ></img>
         </p>
       </div>
       <div className={css.cardDescriptionImage}>
         <img
           className={css.cardImage}
-          src={cardList[1].images.large}
+          src={card.images.large}
         ></img>
         <div className={css.cardDescription}>
           <h2>Card Overview</h2>
           <p>
-            <b>ID: </b>{cardList[1].id}
+            <b>ID: </b>{card.id}
           </p>
           <p>
-            <b>Card Number/Rarity: </b>{cardList[1].number} / {cardList[1].set.printedTotal} / {cardList[1].rarity}
+            <b>Card Number/Rarity: </b>{card.number} / {card.set.printedTotal} / {card.rarity}
           </p>
           <p>
             <b>Card Type / HP / Subtypes: </b>
-            {cardList[1].types.map((type, index) => {
-              if (index === cardList[1].types.length - 1) {
+            {card.types.map((type, index) => {
+              if (index === card.types.length - 1) {
                 return type;
               } else {
                 return type + " / "
               }
-            })} / {cardList[1].hp} /
-            &nbsp;{cardList[1].subtypes.map((subtype, index) => {
-              if (index === cardList[1].subtypes.length - 1) {
+            })} / {card.hp} /
+            &nbsp;{card.subtypes.map((subtype, index) => {
+              if (index === card.subtypes.length - 1) {
                 return subtype;
               } else {
                 return subtype + " / "
@@ -44,59 +82,36 @@ const CardView = ({ cardList }) => {
             })}
           </p>
           <p>
-            <b>Artist: </b>{cardList[1].artist}
+            <b>Artist: </b>{card.artist}
           </p>
           <h2>
-            <a href={cardList[1].tcgplayer.url}>
+            <a href={card.tcgplayer.url}>
               TCGplayer Card Prices
             </a>
           </h2>
-          <p>
-            <b>Average Price: </b>${cardList[1].tcgplayer.prices.holofoil.market}
-          </p>
-          <p>
-            <b>High: </b> ${cardList[1].tcgplayer.prices.holofoil.high}
-          </p>
-          <p>
-            <b>Low: </b> ${cardList[1].tcgplayer.prices.holofoil.low}
-          </p>
+          {renderPrices()}
           <div className={css.rowContainer}>
-            <button className={css.button}>
-              Buy Now
+            <button
+              className={css.button}
+              >Add to Wishlist
             </button>
-            <button className={css.button}>
-              Sell this Card
+            <button
+              className={css.button}
+              onClick={handleTrade}
+              >Trade this Card
             </button>
-            <button className={css.button}>
-              Trade this Card
-            </button>
+            {tradeModalEnabled ?
+              <div className={css.modal_background}>
+                <div className={css.model_content}>
+                  <div
+                  className={css.tradeModal}
+                  >Trade</div>
+                <div className={css.closeButton} onClick={handleTrade}>Close</div>
+                </div>
+              </div> :
+              <div></div>
+            }
           </div>
-        </div>
-      </div>
-      <div className={css.arrowsContainer}>
-        <div className={css.rowContainer}>
-          <img
-            className={css.arrow}
-            src='https://img.icons8.com/small/344/left.png'
-          ></img>
-          <img
-            className={css.arrowCardImage}
-            src={cardList[0].images.small}
-          ></img>
-          {cardList[0].name}<br></br>
-          ({cardList[0].number}/{cardList[0].set.printedTotal})
-        </div>
-        <div className={css.rowContainer}>
-          {cardList[2].name}<br></br>
-          ({cardList[2].number}/{cardList[2].set.printedTotal})
-          <img
-            className={css.arrowCardImage}
-            src={cardList[2].images.small}
-          ></img>
-          <img
-            className={css.arrow}
-            src='https://img.icons8.com/small/344/right.png'
-          ></img>
         </div>
       </div>
     </div>

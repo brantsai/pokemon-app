@@ -6,28 +6,10 @@ import axios from 'axios';
 import SearchView from './SearchView.jsx';
 
 const App = () => {
-  const [cardList, setCardList] = useState(dummyData.data);
+  const [cardList, setCardList] = useState([]);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState('searchView');
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    axios.get('/api/cards', {
-      params: {
-        q: search
-      }
-    })
-      .then((response) => {
-        setCardList(response.data.data);
-      })
-      .catch((error) => {
-        console.log('client-side ERROR', error);
-      })
-  }
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  }
+  const [card, setCard] = useState('');
 
   useEffect(() => {
     axios.get('/api/cards/set', {
@@ -43,12 +25,38 @@ const App = () => {
       })
   }, []);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.get('/api/cards', {
+      params: {
+        q: search
+      }
+    })
+      .then((response) => {
+        setCardList(response.data.data);
+        setCurrentPage('searchView');
+      })
+      .catch((error) => {
+        console.log('client-side ERROR', error);
+      })
+  }
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  }
+
+  const handleHome = () => {
+    setCurrentPage('searchView');
+  }
+
   const renderPage = () => {
     if (currentPage === 'cardView') {
       return (
         <div className={css.mainContainer}>
           <CardView
             cardList={cardList}
+            setCard={setCard}
+            card={card}
           />
         </div>
       )
@@ -59,6 +67,8 @@ const App = () => {
         <div className={css.mainContainer}>
           <SearchView
             cardList={cardList}
+            setCard={setCard}
+            setCurrentPage={setCurrentPage}
           />
         </div>
       )
@@ -68,7 +78,11 @@ const App = () => {
   return (
     <div>
       <div className={css.mainHeader}>
-        <h1>Pokemon Cards</h1>
+        <h1
+          onClick={handleHome}
+          className={css.homeButton}
+          >Pokemon Cards
+        </h1>
         <form>
           <input onChange={handleSearch} type="text" value={search}></input>
           <input onClick={handleSubmit} type="submit"></input>
