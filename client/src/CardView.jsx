@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import css from './app.module.css';
 
-const CardView = ({ card }) => {
+const CardView = ({ card, setCurrentPage }) => {
   const [tradeModalEnabled, setTradeModalEnabled] = useState(false);
+  const [imageModalEnabled, setImageModalEnabled] = useState(false);
 
   const handleTrade = () => {
     setTradeModalEnabled(!tradeModalEnabled);
+  }
+
+  const handleReturn = () => {
+    setCurrentPage('searchView')
+  }
+
+  const handleImageModal = () => {
+    setImageModalEnabled(!imageModalEnabled)
   }
 
   const renderPrices = () => {
@@ -53,6 +62,7 @@ const CardView = ({ card }) => {
       </div>
       <div className={css.cardDescriptionImage}>
         <img
+          onClick={handleImageModal}
           className={css.cardImage}
           src={card.images.large}
         ></img>
@@ -111,8 +121,21 @@ const CardView = ({ card }) => {
               </div> :
               <div></div>
             }
+            {imageModalEnabled ?
+              <div className={css.modal_background}>
+                <div className={css.model_content}>
+                  <img className={css.cardModalView} src={card.images.large}></img>
+                <div className={css.closeButton} onClick={handleImageModal}>Close</div>
+                </div>
+              </div> :
+              <div></div>
+            }
           </div>
         </div>
+      </div>
+      <div onClick={handleReturn} className={css.returnContainer}>
+        <img className={css.return} src="https://img.icons8.com/ios-glyphs/344/undo.png"></img>
+        <div>Return to search</div>
       </div>
     </div>
   )

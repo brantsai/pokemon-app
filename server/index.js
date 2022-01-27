@@ -17,6 +17,7 @@ app.use(cors());
 // SEARCH CARDS
 app.get('/api/cards', controller.getCards);
 app.get('/api/cards/set', controller.getSetCards);
+app.get('/api/sets', controller.getAllSets);
 
 app.listen(port, () => {
   console.log('Listening at http://localhost:' + port);

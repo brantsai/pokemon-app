@@ -3,15 +3,6 @@ import css from './app.module.css';
 import Card from './Card.jsx';
 
 const SearchView = ({ cardList, setCard, setCurrentPage }) => {
-  const listCards = cardList.map((card) =>
-    <Card
-      cardInfo={card}
-      key={card.id}
-      setCard={setCard}
-      setCurrentPage={setCurrentPage}
-    />
-  )
-
   if (cardList.length <= 0) {
     return (
       <div>No cards to show!</div>
@@ -20,7 +11,14 @@ const SearchView = ({ cardList, setCard, setCurrentPage }) => {
     return (
       <div className={css.centerColumn}>
         <div className={css.cardDisplayContainer}>
-          {listCards}
+          {cardList.map((card) =>
+            <Card
+            cardInfo={card}
+            key={card.id}
+            setCard={setCard}
+            setCurrentPage={setCurrentPage}
+          />
+          )}
         </div>
       </div>
     )

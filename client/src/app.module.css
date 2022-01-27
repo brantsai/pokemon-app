@@ -69,6 +69,10 @@ a {
   max-width: 400px;
 }
 
+.cardImage:hover {
+  cursor: pointer;
+}
+
 .rowContainer {
   display: flex;
   flex-direction: row;
@@ -150,8 +154,8 @@ a {
 
 .cardDisplayContainer {
   display: flex;
+  max-width: 100%;
   flex-direction: row;
-  width: 100%;
   flex-wrap: wrap;
 }
 
@@ -214,4 +218,43 @@ a {
 
 .closeButton:hover {
   cursor: pointer;
+}
+
+.setLogoContainer {
+  margin: 3%;
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  height: 100px;
+}
+
+.setLogoContainer:hover {
+  cursor: pointer;
+}
+
+.setLogo {
+  height: 100%;
+}
+
+.setText {
+  align-self: center;
+  margin-top: 10px;
+}
+
+.return {
+  height: 30px;
+  width: 30px;
+}
+
+.returnContainer:hover {
+  cursor: pointer;
+}
+
+.cardModalView {
+  height: 1000px;
+}
+
+.searchbar {
+  justify-self: center;
+  align-self: center;
 }

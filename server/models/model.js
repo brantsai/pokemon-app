@@ -9,7 +9,13 @@ module.exports = {
     },
   ),
   getSetCards: (req) => axios.get(
-    `https://api.pokemontcg.io/v2/cards?q=set.name:${req.query.q}`,
+    `https://api.pokemontcg.io/v2/cards?q=set.id:${req.query.q}`,
+    {
+      headers: { Authorization: config.API_KEY },
+    },
+  ),
+  getAllSets: () => axios.get(
+    `https://api.pokemontcg.io/v2/sets?orderBy=-releaseDate`,
     {
       headers: { Authorization: config.API_KEY },
     },

@@ -4,26 +4,40 @@ import CardView from './CardView.jsx';
 import css from './app.module.css';
 import axios from 'axios';
 import SearchView from './SearchView.jsx';
+import Home from './Home.jsx';
 
 const App = () => {
   const [cardList, setCardList] = useState([]);
   const [search, setSearch] = useState('');
-  const [currentPage, setCurrentPage] = useState('searchView');
+  const [currentPage, setCurrentPage] = useState('home');
   const [card, setCard] = useState('');
+  const [setList, setSetList] = useState([]);
+  const [set, setSet] = useState([]);
 
   useEffect(() => {
+    axios.get('/api/sets')
+      .then((response) => {
+        setSetList(response.data.data);
+      })
+      .catch((error) => {
+        console.log('client-side ERROR', error);
+      });
+  }, []);
+
+  const getSet = (setId) => {
     axios.get('/api/cards/set', {
       params: {
-        q: 'evolving'
+        q: setId
       }
     })
       .then((response) => {
         setCardList(response.data.data);
+        setCurrentPage('searchView');
       })
       .catch((error) => {
         console.log('client-side ERROR', error);
-      })
-  }, []);
+      });
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,16 +60,26 @@ const App = () => {
   }
 
   const handleHome = () => {
-    setCurrentPage('searchView');
+    setCurrentPage('home');
   }
 
   const renderPage = () => {
+    if (currentPage === 'home') {
+      return (
+        <div className={css.mainContainer}>
+          <Home
+            setList={setList}
+            getSet={getSet}
+          />
+        </div>
+      )
+    }
+
     if (currentPage === 'cardView') {
       return (
         <div className={css.mainContainer}>
           <CardView
-            cardList={cardList}
-            setCard={setCard}
+            setCurrentPage={setCurrentPage}
             card={card}
           />
         </div>
@@ -83,7 +107,7 @@ const App = () => {
           className={css.homeButton}
           >Pokemon Cards
         </h1>
-        <form>
+        <form className={css.searchbar}>
           <input onChange={handleSearch} type="text" value={search}></input>
           <input onClick={handleSubmit} type="submit"></input>
         </form>
