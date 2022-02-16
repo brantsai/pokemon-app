@@ -3,6 +3,7 @@ import css from './app.module.css';
 
 const Card = ({ cardInfo, setCard, setCurrentPage }) => {
   const handleClick = () => {
+    console.log(cardInfo)
     setCard(cardInfo);
     setCurrentPage('cardView');
   }

@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "npx nodemon server/index.js",
-    "webpack": "webpack --config webpack.config.js -w"
+    "build": "webpack --config webpack.config.js -w"
   },
   "eslintConfig": {
     "extends": [
