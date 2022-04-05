@@ -43,10 +43,10 @@ $ npm install
 
 #### Run the server
 ```
-$ npm run build
+$ npm run start
 ```
 
 #### Run webpack
 ```
-$ npm run build-dev
+$ npm run build
 ```
