@@ -8,9 +8,6 @@ Link: https://www.sunriserealty.io/ <br />
 
 </p>
 
-<img width="1432" alt="Screen Shot 2021-12-29 at 10 24 57 AM" src="https://user-images.githubusercontent.com/81180232/147692363-0450fee3-51f1-4f0e-8ae6-965c6e731fde.png">
-
-
 ## Key Features
 * View and Search for over 9000+ Pokemon Cards
 * Simple, modern design
