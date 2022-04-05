@@ -18,6 +18,7 @@ Platform for Viewing and Trading Pokemon TCG Cards <br /><br />
 * ReactJS
 * HTML
 * CSS
+* Express
 * Node.js
 
 ## How To Use
