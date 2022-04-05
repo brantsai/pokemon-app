@@ -4,7 +4,6 @@
 
 <p align="center">
 Platform for Viewing and Trading Pokemon TCG Cards <br /><br />
-Link: https://www.sunriserealty.io/ <br />
 
 </p>
 
